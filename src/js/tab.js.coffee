@@ -128,6 +128,9 @@ class Tab
     this.$trigger.each (index, trigger) =>
       $(trigger).on 'click', => this._triggerClickEventHandle index
 
+  # ===================================================================
+  # public function
+  # ===================================================================
   setTab: => this._setTriggerEvent()
 
 (->
