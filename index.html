@@ -7,16 +7,29 @@
   <title>Document</title>
 </head>
 <body>
-  <div class="tab" data-tab>
+  <div class="tab" data-switch-tab>
+    <div class="tab__menu-wrap">
+        <a class="tab__menu" href="javascript:;" data-switch-tab-trigger="active">1</a>
+        <a class="tab__menu" href="javascript:;" data-switch-tab-trigger>2</a>
+        <a class="tab__menu" href="javascript:;" data-switch-tab-trigger>3</a>
+    </div>
+    <div class="tab__content-wrap">
+        <div class="tab__content" data-switch-tab-content>1</div>
+        <div class="tab__content" data-switch-tab-content>2</div>
+        <div class="tab__content" data-switch-tab-content>3</div>
+    </div>
+  </div>
+
+  <div class="tab" data-fade-tab>
       <div class="tab__menu-wrap">
-          <a class="tab__menu" href="javascript:;" data-tab-trigger="active">1</a>
-          <a class="tab__menu" href="javascript:;" data-tab-trigger>2</a>
-          <a class="tab__menu" href="javascript:;" data-tab-trigger>3</a>
+          <a class="tab__menu" href="javascript:;" data-fade-tab-trigger="active">1</a>
+          <a class="tab__menu" href="javascript:;" data-fade-tab-trigger>2</a>
+          <a class="tab__menu" href="javascript:;" data-fade-tab-trigger>3</a>
       </div>
       <div class="tab__content-wrap">
-          <div class="tab__content" data-tab-content>1</div>
-          <div class="tab__content" data-tab-content>2</div>
-          <div class="tab__content" data-tab-content>3</div>
+          <div class="tab__content" data-fade-tab-content>1</div>
+          <div class="tab__content" data-fade-tab-content>2</div>
+          <div class="tab__content" data-fade-tab-content>3</div>
       </div>
     </div>
 </body>

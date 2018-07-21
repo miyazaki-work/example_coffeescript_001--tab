@@ -115,10 +115,15 @@ class Tab
     this.$trigger.each (index, trigger) =>
       $(trigger).on 'click', => this._triggerClickEventHandle index
 
+  _initContentStyle: =>
+    this.$content.not(this.$content.eq(0)).hide 0
+
   # ===================================================================
   # public function
   # ===================================================================
-  setTab: => this._setTriggerEvent()
+  setTab: =>
+    this._initContentStyle()
+    this._setTriggerEvent()
 
 # ======================================================================
 # ----------------------------------------------------------------------
@@ -141,11 +146,46 @@ class SwitchTab extends Tab
 
     $otherContent.hide 0, => $targetContent.show 0
 
+# ======================================================================
+# ----------------------------------------------------------------------
+# FadeTab
+# ----------------------------------------------------------------------
+# ======================================================================
+class FadeTab extends Tab
+  constructor: (options) -> super options
+  
+  # ===================================================================
+  # private function
+  # @params {number} target content's index number
+  # 
+  # This function switches a active content.
+  # Active content is judged by number.
+  # ===================================================================
+  _switchContent: (index) =>
+    $targetContent = this.$content.eq index
+    $otherContent  = this.$content.not $targetContent
+
+    $otherContent.fadeOut 0, => $targetContent.fadeIn()
+
 (->
-  containerAttr = 'data-tab';
+  containerAttr = 'data-switch-tab';
 
   $('[' + containerAttr + ']').each (index, container) =>
     tab = new SwitchTab
+      $container   : $ container
+      containerAttr: containerAttr
+      triggerAttr  : containerAttr + '-trigger'
+      contentAttr  : containerAttr + '-content'
+      activeValue  : 'active'
+
+    tab.setTab()
+)()
+
+(->
+  containerAttr = 'data-fade-tab';
+
+  $('[' + containerAttr + ']').each (index, container) =>
+    tab = new FadeTab
       $container   : $ container
       containerAttr: containerAttr
       triggerAttr  : containerAttr + '-trigger'
