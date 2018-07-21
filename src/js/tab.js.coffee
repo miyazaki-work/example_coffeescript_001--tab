@@ -47,7 +47,7 @@ class Tab
       activeIndex = -1
 
       this.$trigger.each (index, trigger) => if $(trigger).attr(this.triggerAttr) == this.activeValue
-          activeIndex = index
+        activeIndex = index
 
       activeIndex
 
@@ -69,27 +69,14 @@ class Tab
     # ===================================================================
     $content     : get: -> this.$container.find this._createAttrSelector this.contentAttr
 
-   # ===================================================================
-   # private function
-   # @params
-   #   attr {string} attribute
-   #   data {string} attribute's value
-   # ===================================================================
-   _createAttrSelector: (attr, data) =>
-     if data? then '[' + attr + '="' + data + '"]' else '[' + attr + ']'
-
   # ===================================================================
   # private function
-  # @params {number} target content's index number
-  # 
-  # This function switches a active content.
-  # Active content is judged by number.
+  # @params
+  #   attr {string} attribute
+  #   data {string} attribute's value
   # ===================================================================
-  _switchContent: (index) =>
-    $targetContent = this.$content.eq index
-    $otherContent  = this.$content.not $targetContent
-
-    $otherContent.hide 0, => $targetContent.show()
+  _createAttrSelector: (attr, data) =>
+    if data? then '[' + attr + '="' + data + '"]' else '[' + attr + ']'
 
   # ===================================================================
   # private function
@@ -113,7 +100,7 @@ class Tab
   # Target content/trigger is judged by number.
   # ===================================================================
   _triggerClickEventHandle: (index) =>
-    if index == this.activeIndex
+    if index is this.activeIndex
       return
 
     this._switchTrigger index
@@ -133,11 +120,32 @@ class Tab
   # ===================================================================
   setTab: => this._setTriggerEvent()
 
+# ======================================================================
+# ----------------------------------------------------------------------
+# SwitchTab
+# ----------------------------------------------------------------------
+# ======================================================================
+class SwitchTab extends Tab
+  constructor: (options) -> super options
+  
+  # ===================================================================
+  # private function
+  # @params {number} target content's index number
+  # 
+  # This function switches a active content.
+  # Active content is judged by number.
+  # ===================================================================
+  _switchContent: (index) =>
+    $targetContent = this.$content.eq index
+    $otherContent  = this.$content.not $targetContent
+
+    $otherContent.hide 0, => $targetContent.show 0
+
 (->
   containerAttr = 'data-tab';
 
   $('[' + containerAttr + ']').each (index, container) =>
-    tab = new Tab
+    tab = new SwitchTab
       $container   : $ container
       containerAttr: containerAttr
       triggerAttr  : containerAttr + '-trigger'
