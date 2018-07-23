@@ -3,4 +3,4 @@
 coffeeScript練習
 ただのタブ
 
-upstream test3
+upstream test3-2
